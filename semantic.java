@@ -56,6 +56,35 @@ public class semantic
       declarings(split_line,return_val);
     }
 
+    //Function call
+    else
+    {
+      return_val=line_ops.is_in(split_line[0],data.functions);
+      if(return_val>=0)
+      {
+        i=0;
+        int fun_pars=0;
+        while(split_line[i]!=null)
+        {
+          if(split_line[i].equals(","))
+          {
+            fun_pars++;
+          }
+          i++;
+        }
+        fun_pars++;
+        if(data.parameters[return_val]==fun_pars)
+        {
+          return 0;
+        }
+        else
+        {
+          add_error("Invalid number of parameters for function call");
+        }
+      }
+    }
+
+
     //Assigning
     chk_for_assign(split_line);
 
